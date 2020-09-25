@@ -1,0 +1,5 @@
+#!/bin/bash
+function dockerps() {
+  docker ps -q | xargs docker inspect --format '{{range .NetworkSettings.Networks}}{{print .IPAddress}}{{end}} -- {{.ID}} - {{.Name}}'
+}
+dockerps()
