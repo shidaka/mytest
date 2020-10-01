@@ -68,9 +68,7 @@ public class MyserviceApplication implements GreetingController {
 			e.printStackTrace();
 		}
 
-		res = loadSize > 0
-				? b.toString()
-				: resp == null ? "Ok" : resp;
+		res = resp == null ? "Ok" : resp;
 
 		return res;
 	}
