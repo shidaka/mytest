@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # CONTAINERS=$(docker ps -q)
 CONTAINERS=$(cat pids)
