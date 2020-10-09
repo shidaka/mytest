@@ -38,7 +38,7 @@ $(docker run \
     --link myeureka \
     --rm \
     --cpus 1 \
-    --memory 3g \
+    --memory 132096k \
     myservice)
 
 $(docker run \
@@ -48,7 +48,7 @@ $(docker run \
     --link myeureka \
     --rm \
     --cpus 1 \
-    --memory 3g \
+    --memory 132096k \
     myservice)
 
 $(docker run \

@@ -16,13 +16,13 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="delay" elementType="Argument">
             <stringProp name="Argument.name">delay</stringProp>
-            <stringProp name="Argument.value">100</stringProp>
+            <stringProp name="Argument.value">0</stringProp>
             <stringProp name="Argument.desc">delay (ms) da resposta</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="size" elementType="Argument">
             <stringProp name="Argument.name">size</stringProp>
-            <stringProp name="Argument.value">524288</stringProp>
+            <stringProp name="Argument.value">0</stringProp>
             <stringProp name="Argument.desc">size (bytes) alocados no Heap pelo endpoint</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
@@ -40,7 +40,7 @@
           </elementProp>
           <elementProp name="repeat" elementType="Argument">
             <stringProp name="Argument.name">repeat</stringProp>
-            <stringProp name="Argument.value">4</stringProp>
+            <stringProp name="Argument.value">1</stringProp>
             <stringProp name="Argument.desc"># loop</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
@@ -315,6 +315,15 @@
         </objProp>
         <stringProp name="filename"></stringProp>
       </ResultCollector>
+      <hashTree/>
+      <ResultSaver guiclass="ResultSaverGui" testclass="ResultSaver" testname="Save Responses to a file" enabled="true">
+        <stringProp name="FileSaver.filename">/home/sergio/dev/docker/mytest/jmeter/responses/resp</stringProp>
+        <boolProp name="FileSaver.errorsonly">true</boolProp>
+        <boolProp name="FileSaver.successonly">false</boolProp>
+        <boolProp name="FileSaver.skipsuffix">false</boolProp>
+        <boolProp name="FileSaver.skipautonumber">false</boolProp>
+        <boolProp name="FileSaver.addTimstamp">true</boolProp>
+      </ResultSaver>
       <hashTree/>
     </hashTree>
   </hashTree>

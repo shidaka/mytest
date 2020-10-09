@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.Vector;
-import java.util.concurrent.Future;
+import java.util.Random;
 
 @SpringBootApplication
 @RestController
@@ -44,21 +42,32 @@ public class MyserviceApplication implements GreetingController {
 
 	final static String str = "01234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
+	String randStr() {
+		StringBuilder b = new StringBuilder();
+		Random r = new Random();
+		int strSize = str.length();
+		for (int i=0; i<strSize; i++) {
+			int p = r.nextInt(strSize);
+			b.append(str.charAt(p));
+		}
+		return b.toString();
+	}
+
 	@Override
-	public String foo(Integer delay, Integer size, String resp) {
+	public String foo(Integer delay, Integer size, String resp, boolean returnData) {
 		int wait = delay == null ? 0 : delay;
 		int loadSize = size == null ? 0 : size;
 		String res;
-		int strSize = str.length();
-
+		String rStr = randStr();
+		int strSize = rStr.length();
 		StringBuilder b = new StringBuilder();
 		while (b.length() < loadSize)
 		{
 			if (loadSize - b.length() >= strSize)
-				b.append(str);
+				b.append(rStr);
 			else {
 				int chunk = loadSize - b.length();
-				b.append(str.substring(0, chunk));
+				b.append(rStr.substring(0, chunk));
 			}
 		}
 
@@ -70,7 +79,7 @@ public class MyserviceApplication implements GreetingController {
 
 		res = resp == null ? "Ok" : resp;
 
-		return res;
+		return returnData ? b.toString() : res;
 	}
 
 	@Override

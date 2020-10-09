@@ -13,7 +13,8 @@ public interface GreetingController {
     @RequestMapping(path = "/foo", method = RequestMethod.GET, name = "/foo")
     String foo(@QueryParam("delay") Integer delay,
                @QueryParam("size") Integer size,
-               @QueryParam("resp") String resp
+               @QueryParam("resp") String resp,
+               @QueryParam("returnData") boolean returnData
     );
 
     @RequestMapping(path = "/bar", method = RequestMethod.POST, name = "/bar")
