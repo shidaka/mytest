@@ -7,11 +7,11 @@ BEGIN {
         #print ">>>", $0
         count_500 += 1
     } else if ($0 ~ /Connection timed out/) {
-        print ">>>", $0
+        #print ">>>", $0
         count_TO += 1
     } else {
 
-        print
+        #print
     }
 }
 END {
