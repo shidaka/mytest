@@ -21,6 +21,10 @@ popd
 # WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
 # WARNING: All illegal access operations will be denied in a future release
 
+MYEUREKA_RAM=$(( 1 * 1024 * 1024 ))
+MYZUUL_RAM=$(( 1 * 1024 * 1024 ))
+MYSERVICE_RAM=$(( 140 * 1024 ))
+
 cat << EOF > pids
 $(docker run \
     -d \
@@ -28,7 +32,7 @@ $(docker run \
     -e JAVA_OPTS="--illegal-access=permit -XX:+PrintFlagsFinal -DEUREKA_PORT=8761" \
     --rm \
     --cpus 1 \
-    --memory 3g \
+    --memory ${MYEUREKA_RAM}k \
     myeureka)
 
 $(docker run \
@@ -38,7 +42,7 @@ $(docker run \
     --link myeureka \
     --rm \
     --cpus 1 \
-    --memory 132096k \
+    --memory ${MYSERVICE_RAM}k \
     myservice)
 
 $(docker run \
@@ -48,7 +52,7 @@ $(docker run \
     --link myeureka \
     --rm \
     --cpus 1 \
-    --memory 132096k \
+    --memory ${MYSERVICE_RAM}k \
     myservice)
 
 $(docker run \
@@ -58,9 +62,12 @@ $(docker run \
     --link myeureka \
     --rm \
     --cpus 1 \
-    --memory 3g \
+    --memory ${MYZUUL_RAM}k \
     myzuul)
 EOF
+
+rm -f jmeter/responses/TGZ/*
+rm -f jmeter/responses/TGM/*
 
 docker ps
 
