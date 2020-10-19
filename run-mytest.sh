@@ -21,9 +21,23 @@ popd
 # WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
 # WARNING: All illegal access operations will be denied in a future release
 
-MYEUREKA_RAM=$(( 1 * 1024 * 1024 ))
-MYZUUL_RAM=$(( 1 * 1024 * 1024 ))
-MYSERVICE_RAM=$(( 140 * 1024 ))
+# ---------- myeureka -------------------------
+MYEUREKA_RAM=$(( 3 * 1024 * 1024 ))
+MYEUREKA_HARDLIMIT=$(( 2 * 1024 ))
+MYEUREKA_SOFTLIMIT=$(( 2 * 1024 ))
+MYEUREKA_OPEN_FILES=$MYEUREKA_SOFTLIMIT:$MYEUREKA_HARDLIMIT
+
+# ---------- myzuul    ------------------------
+MYZUUL_RAM=$(( 1024 * 1024 ))
+MYZUUL_HARDLIMIT=$(( 2 * 1024 ))
+MYZUUL_SOFTLIMIT=$(( 2 * 1024 ))
+MYZUUL_OPEN_FILES=$MYZUUL_SOFTLIMIT:$MYZUUL_HARDLIMIT
+
+# ---------- myservice ------------------------
+MYSERVICE_RAM=$(( 200 * 1024 ))
+MYSERVICE_HARDLIMIT=$(( 2 * 1024 ))
+MYSERVICE_SOFTLIMIT=$(( 2 * 1024 ))
+MYSERVICE_OPEN_FILES=$MYSERVICE_SOFTLIMIT:$MYSERVICE_HARDLIMIT
 
 cat << EOF > pids
 $(docker run \
@@ -33,6 +47,7 @@ $(docker run \
     --rm \
     --cpus 1 \
     --memory ${MYEUREKA_RAM}k \
+    --ulimit nofile=$MYEUREKA_OPEN_FILES \
     myeureka)
 
 $(docker run \
@@ -43,6 +58,7 @@ $(docker run \
     --rm \
     --cpus 1 \
     --memory ${MYSERVICE_RAM}k \
+    --ulimit nofile=$MYSERVICE_OPEN_FILES \
     myservice)
 
 $(docker run \
@@ -53,6 +69,7 @@ $(docker run \
     --rm \
     --cpus 1 \
     --memory ${MYSERVICE_RAM}k \
+    --ulimit nofile=$MYSERVICE_OPEN_FILES \
     myservice)
 
 $(docker run \
@@ -63,6 +80,7 @@ $(docker run \
     --rm \
     --cpus 1 \
     --memory ${MYZUUL_RAM}k \
+    --ulimit nofile=$MYZUUL_OPEN_FILES \
     myzuul)
 EOF
 

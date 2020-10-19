@@ -44,11 +44,6 @@
             <stringProp name="Argument.desc"># loop</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="response_file" elementType="Argument">
-            <stringProp name="Argument.name">response_file</stringProp>
-            <stringProp name="Argument.value">resp_d${delay}_s${size}_r${rampup}</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
           <elementProp name="run_zuul" elementType="Argument">
             <stringProp name="Argument.name">run_zuul</stringProp>
             <stringProp name="Argument.value">true</stringProp>
@@ -56,7 +51,7 @@
           </elementProp>
           <elementProp name="run_myservice" elementType="Argument">
             <stringProp name="Argument.name">run_myservice</stringProp>
-            <stringProp name="Argument.value">true</stringProp>
+            <stringProp name="Argument.value">false</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -70,8 +65,8 @@
         </elementProp>
         <stringProp name="ThreadGroup.num_threads">${threads}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${rampup}</stringProp>
-        <boolProp name="ThreadGroup.scheduler">false</boolProp>
-        <stringProp name="ThreadGroup.duration"></stringProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">1</stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
       </ThreadGroup>

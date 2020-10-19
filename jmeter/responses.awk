@@ -6,6 +6,7 @@ BEGIN {
     count_CR = 0
     count_RE = 0
     count_HU = 0
+    count_OF = 0
 }
 {
     if ($0 ~ /"status":500/) {
@@ -26,13 +27,16 @@ BEGIN {
     } else if ($0 ~ /java.net.NoRouteToHostException: No route to host/) {
         #print ">>>", $0
         count_HU += 1
+    } else if ($0 ~ /java.net.SocketException: Too many open files/) {
+        #print ">>>", $0
+        count_OF += 1
         
     } else if ($0 ~/"status":404/) {
         count_404 += 1
     } else if ($0 ~ /"status":504/) {
         count_504 += 1
     } else if ($0 ~ /Exception/) {
-        # print
+        print
     } else {
         #print
     }
@@ -46,4 +50,5 @@ END {
     print "Connection refused:", count_RE
     print "No route to host (Host Unreachable):", count_HU
     print "No Http Response:", count_NR
+    print "Too manu open files:", count_OF
 }
